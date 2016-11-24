@@ -1,35 +1,25 @@
-class Solution {
-public:
-    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        /*
-         * 功能：将两个链表相加
-         * 参数：l1,l2：两个链表的首指针
-         * 返回值：链表的首指针
-         */
+#include <iostream>
 
-        auto Head = new ListNode(0);    // new 一个节点用于保存首节点信息
-        auto node = Head;
+using namespace std;
 
-        int step = 0;   // 保存进位
-        while (l1 || l2 || step) {  //  循环直至两链表到底且此时无进位
-            node->next = new ListNode(0);   // 仅需运算，生成新的节点
-            node = node->next;
+template<typename T>
+void merge(T lst[], int sp1, int sp2) {
+    /*
+     * 功能：两个有序子序列归并
+     * 参数：lst：序列串，sp1：子串1的开始索引，sp2：子串2的开始索引
+     * 返回值：无
+     */
 
-            if (l1) node->val += l1->val;   //  节点存在就加上他的值
-            if (l2) node->val += l2->val;
+    // 子串的长度
+    int len = sp2 - sp1;
 
-            node->val += step;   // 加上之前的进位
-            step = node->val / 10; // 计算新的进位
+    // 申请一个临时空间包含两个子串
+    T *tmp = new T[len * 2];
+    Erro
 
-            node->val %= 10;    //  只保留十进制下的值
 
-            if (l1) l1 = l1->next;  // 若节点存在，则后移一位
-            if (l2) l2 = l2->next;
-        }
+}
 
-        node = Head->next;
-        delete (Head);  //  Head 本身并不存数据，用完后销毁
+int main() {
 
-        return node;
-    }
-};
+}
