@@ -2,23 +2,23 @@
 
 using namespace std;
 
+template <typename T>
+void merge(T lst[],)
+
 template<typename T>
-void merge(T lst[], int sp1, int sp2) {
+void merge_sort(T lst[], int length) {
     /*
-     * 功能：两个有序子序列归并
-     * 参数：lst：序列串，sp1：子串1的开始索引，sp2：子串2的开始索引
+     * 功能：对序列 lst 进行归并排序
+     * 参数：lst：序列指针，length：序列长度
      * 返回值：无
      */
 
-    // 子串的长度
-    int len = sp2 - sp1;
+    // 子串的最大长度，取总长度的一半并向上取整
+    int sub_maxlen = (length + 1) / 2;
 
-    // 申请一个临时空间包含两个子串
-    T *tmp = new T[len * 2];
-    Erro
-
-
+    for(int len=0)
 }
+
 
 int main() {
 
