@@ -3,10 +3,10 @@
 using namespace std;
 
 template<typename T>
-int unsorted_binary_search(T lst[], int length, T point) {
+int unsorted_binary_search(T lst[], int length, T aim) {
     /*
      * 功能：非有序数组的二分查找
-     * 参数：lst 待查找的数组，length 数组的长度，point 待查找的元素
+     * 参数：lst 待查找的数组，length 数组的长度，aim 待查找的元素
      * 返回值：若找到，目标元素的下标（排序后），否则返回 -1
      */
 
@@ -35,8 +35,8 @@ int unsorted_binary_search(T lst[], int length, T point) {
         auto pivot = tmp.first;
         auto index = tmp.second;
 
-        if (pivot == point) return index;
-        else if (pivot < point) head = index + 1;
+        if (pivot == aim) return index;
+        else if (pivot < aim) head = index + 1;
         else tail = index - 1;
     }
 
