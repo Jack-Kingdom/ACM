@@ -1,11 +1,3 @@
-//
-// Created by Jack King on 12/7/16.
-//
-
-#include <iostream>
-
-using namespace std;
-
 template<typename T>
 int unsorted_index_binary_search(T *lst, int length, int index) {
     /*
@@ -43,23 +35,9 @@ int unsorted_index_binary_search(T *lst, int length, int index) {
 
         // 找到元素，返回对应的值
         if (pivot_index == index) return lst[index];
-
-        if (pivot_index > index) tail = pivot_index - 1;
+        else if (pivot_index > index) tail = pivot_index - 1;
         else head = pivot_index + 1;
     }
 
     return -1;
-}
-
-int main() {
-    int n, k;
-    cin >> n >> k;
-
-    int *lst = new int[n];
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &lst[i]);
-    }
-
-    cout << unsorted_index_binary_search(lst, n, k - 1);
-    return 0;
 }
