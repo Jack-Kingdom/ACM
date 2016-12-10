@@ -1,43 +1,68 @@
+#include <iostream>
+#include <random>
+
+using namespace std;
+
 template<typename T>
-int unsorted_index_binary_search(T *lst, int length, int index) {
+void merge_sort(T lst[], int length) {
     /*
-     * 功能：在无序数组 lst 中查找第 index 小的数
-     * 参数：lst 待查找的数组、length 数组的长度、index 排序后该元素的下标，也反映了第 index 小的数
-     * 返回值：如果找到，返回 lst[index]；否则返回 -1
+     * 功能：对序列 lst 进行归并排序，自顶向下，递归操作
+     * 参数：lst：序列指针；length：序列长度
+     * 返回值：无
      */
 
-    // 采用快排的思想对序列进行一次分割
-    auto quick_separate = [&lst](int head, int tail) {
-        // 选择基准
-        T pivot = lst[head];
+    // 申请临时空间
+    T *tmp = new T[length];
 
-        int i = head, j = tail;
-        while (i < j) {
-            while (i < j and lst[j] > pivot) j--;
-            lst[i] = lst[j];
-            while (i < j and lst[i] < pivot) i++;
-            lst[j] = lst[i];
+    auto merge = [&lst, &tmp](int first, int first_tail, int second, int second_tail) {
+
+        // 存在任一子串的长度大于 2 ，则将其拆分成两个子串归并
+        int mid = 0;
+        if (first_tail - first > 2) {
+            mid = (first_tail - first) / 2;
+            merge(first, mid, mid, first_tail);
+        }
+        if (second_tail - second > 2) {
+            mid = (second_tail - second) / 2;
+            merge(second, mid, mid, second);
         }
 
-        // 回填
-        lst[i] = pivot;
+        // 临时空间的索引
+        int i = 0;
 
-        // 返回快排分割定序后的索引即可
-        return i;
+        // 归并操作,两个序列均未取完，则先取小的
+        while (first < first_tail && second < second_tail) {
+            tmp[i++] = lst[first] < lst[second] ? lst[first++] : lst[second++];
+        }
+
+        // 存在一个序列已经取完，则将另一序列剩下的元素取尽
+        while (first < first_tail) tmp[i++] = lst[first++];
+        while (second < second_tail) tmp[i++] = lst[second++];
+
+        // 回填
+        while (i--) lst[--second_tail] = tmp[i];
+
     };
 
-    // 二分查找
-    int head = 0, tail = length - 1;
-    while (head <= tail) {
+    // 调用
+    merge(0, length, length, length);
 
-        // pivot_index 基准数的下标
-        int pivot_index = quick_separate(head, tail);
+    // 删除申请的空间
+    delete[] tmp;
+}
 
-        // 找到元素，返回对应的值
-        if (pivot_index == index) return lst[index];
-        else if (pivot_index > index) tail = pivot_index - 1;
-        else head = pivot_index + 1;
+
+int main() {
+    int length = 100;
+    int *lst = new int[length];
+    for (int i = 0; i < length; i++) {
+        lst[i] = rand() % length + 1;
     }
 
-    return -1;
+    merge_sort(lst, length);
+    for (int i = 0; i < length; i++) {
+        cout << lst[i] << " ";
+    }
+
+    return 0;
 }
