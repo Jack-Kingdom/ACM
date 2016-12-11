@@ -14,17 +14,18 @@ void merge_sort(T lst[], int length) {
     // 申请临时空间
     T *tmp = new T[length];
 
-    auto merge = [&lst, &tmp](int first, int first_tail, int second, int second_tail) {
+    std::function<void(int, int, int, int)> merge;
+    merge = [&lst, &tmp, &merge](int first, int first_tail, int second, int second_tail) -> void {
 
         // 存在任一子串的长度大于 2 ，则将其拆分成两个子串归并
         int mid = 0;
-        if (first_tail - first > 2) {
-            mid = (first_tail - first) / 2;
+        if (first_tail - first > 1) {
+            mid = (first_tail + first) / 2;
             merge(first, mid, mid, first_tail);
         }
-        if (second_tail - second > 2) {
-            mid = (second_tail - second) / 2;
-            merge(second, mid, mid, second);
+        if (second_tail - second > 1) {
+            mid = (second_tail + second) / 2;
+            merge(second, mid, mid, second_tail);
         }
 
         // 临时空间的索引
