@@ -1,1 +1,3 @@
-/WorkSpace/*
+WorkSpace/*
+.idea
+cmake-build-debug
