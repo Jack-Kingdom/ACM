@@ -1,3 +1,8 @@
-WorkSpace/*
+# IDE config
 .idea
+
+# C/C++ build info
 cmake-build-debug
+
+# input data file
+WorkSpace/*.txt
